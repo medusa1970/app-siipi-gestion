@@ -16,7 +16,9 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@nuxt/image": "^1.0.0",
     "@nuxt/ui": "^2.10.0",
-    "@pinia/nuxt": "^0.5.1"
+    "@pinia/nuxt": "^0.5.1",
+    "nuxt-graphql-client": "^0.2.31"
   }
 }

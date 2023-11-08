@@ -1,0 +1,9 @@
+query buscarVarias($busqueda: BuscarPersonaDto!) {
+  buscarVariasPersonas(busqueda: $busqueda) {
+    usuario
+    nombre
+    telefono
+    correo
+    permisos
+  }
+}
