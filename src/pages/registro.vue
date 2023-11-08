@@ -1,6 +1,6 @@
 <template>
   <div class="cont-login">
-    <img class="w-80" src="/logo.png" />
+    <!-- <img class="w-80" :src="logo" /> -->
     <form @submit="register" class="form-login w-80">
       <h1 class="font-bold text-2xl">Registrate</h1>
       <Input v-model="persona.nombre" label="Nombre" bordered />
@@ -22,7 +22,7 @@
         label="Contraseña"
         bordered
       />
-      <UButton label="Ingresar" />
+      <UButton class="m-auto px-5 py-[10px]" label="Registrar" />
       <span class="[&>*]:text-gray-500 flex gap-2">
         <p>¿Ya tienes una cuenta?</p>
         <a class="border-b-[1px] border-gray-500 font-semibold" href="/"
@@ -34,8 +34,9 @@
 </template>
 
 <script setup lang="ts">
-import Input from '@/components/Input.vue';
+// import Input from '@/components/Input.vue';
 import { ref } from 'vue';
+// import logo from '@/assets/logo.png';
 
 definePageMeta({
   layout: false

@@ -9,7 +9,7 @@
           >Recuperar mi contraseña</a
         >
       </span>
-      <UButton label="Ingresar" />
+      <UButton class="m-auto px-5 py-[10px]" label="Ingresar" />
       <span class="[&>*]:text-gray-500 flex gap-2">
         <p>¿No tienes cuenta aún?</p>
         <a class="border-b-[1px] border-gray-500 font-semibold" href="/registro"
@@ -17,19 +17,17 @@
         >
       </span>
     </form>
-    <NuxtImg
-      class="w-80"
-      src="https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen-1200x675.jpg"
-    />
+    <!-- <img class="w-80" :src="logo" /> -->
   </div>
 </template>
 
 <script setup>
-import Input from '@/components/Input.vue';
+// import Input from '@/components/Input.vue';
 import { ref } from 'vue';
+// import logo from '@/assets/logo.png';
 
 definePageMeta({
-  layout: false
+  layout: 'custom'
 });
 
 const email = ref('');
@@ -48,7 +46,7 @@ const personas = await GqlBuscarVarias(data);
 
 <style scoped>
 .cont-login {
-  @apply flex flex-col justify-center items-center h-screen gap-12;
+  @apply flex flex-col justify-center items-center h-screen gap-12 border-2 border-red-400;
 }
 .form-login {
   @apply flex flex-col gap-4;
