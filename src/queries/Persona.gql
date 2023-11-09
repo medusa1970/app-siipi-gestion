@@ -7,3 +7,23 @@ query buscarVarias($busqueda: BuscarPersonaDto!) {
     permisos
   }
 }
+
+mutation crearUna($data: CrearPersonaDto!) {
+  crearUnaPersona(data: $data) {
+    _id
+    contrasena
+    nombre
+    telefono
+    correo
+  }
+}
+
+query conectar($data: ConexionDto!) {
+  conectar(data: $data) {
+    token
+  }
+}
+
+query demoAuth {
+  demoAuth
+}

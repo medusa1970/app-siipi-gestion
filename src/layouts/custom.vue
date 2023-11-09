@@ -1,6 +1,7 @@
 <template>
   <div>
     <slot></slot>
+    <UNotifications />
   </div>
 </template>
 

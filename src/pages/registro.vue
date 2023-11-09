@@ -1,6 +1,6 @@
 <template>
   <div class="cont-login">
-    <!-- <img class="w-80" :src="logo" /> -->
+    <img class="w-80" :src="logo" />
     <form @submit="register" class="form-login w-80">
       <h1 class="font-bold text-2xl">Registrate</h1>
       <Input v-model="persona.nombre" label="Nombre" bordered />
@@ -17,12 +17,16 @@
         bordered
       />
       <Input
-        v-model="persona.password"
+        v-model="persona.contrasena"
         type="password"
         label="Contraseña"
         bordered
       />
-      <UButton class="m-auto px-5 py-[10px]" label="Registrar" />
+      <UButton
+        class="m-auto px-5 py-[10px]"
+        label="Registrar"
+        @click="register()"
+      />
       <span class="[&>*]:text-gray-500 flex gap-2">
         <p>¿Ya tienes una cuenta?</p>
         <a class="border-b-[1px] border-gray-500 font-semibold" href="/"
@@ -30,27 +34,56 @@
         >
       </span>
     </form>
+    <!-- <UNotifications /> -->
   </div>
 </template>
 
 <script setup lang="ts">
-// import Input from '@/components/Input.vue';
 import { ref } from 'vue';
-// import logo from '@/assets/logo.png';
+import logo from '@/assets/logo.png';
+import { GqlCrearUna } from '#gql';
 
 definePageMeta({
-  layout: false
+  layout: 'custom'
 });
+
+const toast = useToast();
 
 const persona = ref({
   nombre: '',
   telefono: '',
   correo: '',
-  password: ''
+  contrasena: ''
 });
-
-const register = () => {
-  console.log(persona.value);
+const register = async () => {
+  try {
+    await GqlCrearUna({
+      data: persona.value
+    });
+    toast.add({
+      title: 'Registro exitoso',
+      icon: 'i-heroicons-check-circle',
+      color: 'green'
+    });
+    persona.value.nombre = '';
+    persona.value.telefono = '';
+    persona.value.correo = '';
+    persona.value.contrasena = '';
+  } catch (err: any) {
+    console.log(err.gqlErrors[0].extensions.originalError.message);
+    const message = err.gqlErrors[0].extensions.originalError.message;
+    message
+      ? toast.add({
+          title: message,
+          icon: 'i-heroicons-x-circle',
+          color: 'red'
+        })
+      : toast.add({
+          title: 'Error en la consulta',
+          icon: 'i-heroicons-exclamation-circle',
+          color: 'red'
+        });
+  }
 };
 </script>
 
